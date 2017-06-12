@@ -520,19 +520,22 @@ public class Activity_WatchScanList extends FragmentActivity
 
             //save to filesystem:
             //String filepath = "MaaxAnt/";
-            String filename = "activity.fit";
+            String filename = "activity"+downloadedFitFile.toString().substring(20,30)+".fit";
             File myExternalFile;
-            myExternalFile = new File(Environment.getExternalStoragePublicDirectory(
-            Environment.DIRECTORY_DOWNLOADS), filename);
+            if(isExternalStorageAvailable()){
+                myExternalFile = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), filename);
+                try {
+                    FileOutputStream fos = new FileOutputStream(myExternalFile);
+                    fos.write(downloadedFitFile.getRawBytes());
+                    fos.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                Toast.makeText(Activity_WatchScanList.this, "Activity saved to External Storage...", Toast.LENGTH_LONG).show();
 
-            try {
-                FileOutputStream fos = new FileOutputStream(myExternalFile);
-                fos.write(downloadedFitFile.getRawBytes());
-                fos.close();
-            } catch (IOException e) {
-                e.printStackTrace();
             }
-            Toast.makeText(Activity_WatchScanList.this, "Activity saved to External Storage...", Toast.LENGTH_LONG).show();
+
+
 
         }
     }
