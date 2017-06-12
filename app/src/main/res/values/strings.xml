@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">MaaxAnt</string>
+    <string name="menu_reset">Reset Connection</string>
+    <string name="no_activities_available">No Activities Available</string>
+    <string-array name="device_types">
+        <item>Controllable Device</item>
+        <item>Stride-based Speed and Distance</item>
+    </string-array>
+    <string name="sharedPreferences">token</string>
+    <string name="label_multiDeviceSearchButton">Start Search</string>
+    <string name="searchingText">Searching for devices&#8230;</string>
+    <string name="label_alreadyConnected">Already Connected Devices:</string>
+    <string name="label_foundDevices">Devices Found In Scan:</string>
+    <string name="label_selectAll">Select All</string>
+    <string name="label_deviceTypeFilter">Select Device Types to Search:</string>
+    <string name="label_RSSI">RSSI: </string>
+</resources>
