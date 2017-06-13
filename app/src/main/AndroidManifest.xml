@@ -1,15 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          
-    package="io.github.maximemhd.maaxant"
-    >
+    package="io.github.maximemhd.maaxant">
 
-    <application android:allowBackup="true"
-        android:label="@string/app_name"
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <activity
             android:name=".Activity_Dashboard"
             android:label="@string/app_name">
@@ -19,14 +21,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="io.github.maximemhd.maaxant.watchdownloader.Activity_WatchScanList"
+        <activity
+            android:name=".watchdownloader.Activity_WatchScanList"
+            android:configChanges="orientation"
             android:label="Watch Downloader Plugin Sampler"
-            android:screenOrientation="portrait"
-            android:configChanges="orientation"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name="com.sweetzpot.stravazpot.authenticaton.ui.StravaLoginActivity"
             android:label="login strava" />
+        <activity
+            android:name=".UploadActivity"
+            android:label="@string/title_activity_upload"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.INTERNET"/>
+
 </manifest>

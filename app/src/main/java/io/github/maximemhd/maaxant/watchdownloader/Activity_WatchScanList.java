@@ -520,7 +520,7 @@ public class Activity_WatchScanList extends FragmentActivity
 
             //save to filesystem:
             //String filepath = "MaaxAnt/";
-            String filename = "activity"+downloadedFitFile.toString().substring(20,30)+".fit";
+            String filename = "activity"+downloadedFitFile.getRawBytes().length+".fit";
             File myExternalFile;
             if(isExternalStorageAvailable()){
                 myExternalFile = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), filename);

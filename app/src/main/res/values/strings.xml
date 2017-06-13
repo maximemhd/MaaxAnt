@@ -14,4 +14,5 @@
     <string name="label_selectAll">Select All</string>
     <string name="label_deviceTypeFilter">Select Device Types to Search:</string>
     <string name="label_RSSI">RSSI: </string>
+    <string name="title_activity_upload">UploadActivity</string>
 </resources>
