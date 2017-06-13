@@ -123,7 +123,7 @@ public class UploadActivity extends AppCompatActivity {
                         //.withActivityType(UploadActivityType.RIDE)
                         .withName("Test")
                         .withDescription("No description")
-                        .isPrivate(false)
+                        .isPrivate(true)
                         .hasTrainer(false)
                         .isCommute(false)
                         //.withExternalID("test.fit")
@@ -183,7 +183,7 @@ public class UploadActivity extends AppCompatActivity {
             UploadStatus uploadStatus  = null;
 
             try {
-                 uploadStatus = uploadAPI.checkUploadStatus(config[0].uploadstatus.getActivityID())
+                 uploadStatus = uploadAPI.checkUploadStatus(config[0].uploadstatus.getId())
                         .execute();
             }catch(StravaUnauthorizedException e){
                 Toast.makeText(UploadActivity.this, "erreur", Toast.LENGTH_SHORT).show();
