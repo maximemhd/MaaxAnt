@@ -12,6 +12,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -38,14 +39,14 @@ import java.util.List;
 import io.github.maximemhd.maaxant.watchdownloader.Activity_WatchScanList;
 
 public class UploadActivity extends AppCompatActivity {
-
+ParamPost parampost_global;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_upload);
 
         ListView listView = (ListView) findViewById(R.id.list_files);
-
+        Button button_check = (Button) findViewById(R.id.button_check);
         //List<File> listFitFile = new ArrayList<>();
         ArrayList<String> liste = new ArrayList<String>();
 
@@ -100,6 +101,13 @@ public class UploadActivity extends AppCompatActivity {
 
         }
 
+        button_check.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new async_status().execute(parampost_global);
+            }
+        });
+
     }
 
     private static boolean isExternalStorageAvailable() {
@@ -147,7 +155,8 @@ public class UploadActivity extends AppCompatActivity {
 
         protected void onPostExecute(ParamPost result) {
             ParamPost param = new ParamPost(result.config, result.uploadstatus);
-            new async_status().execute(param);
+           // new async_status().execute(param);
+            parampost_global = param;
             Toast.makeText(UploadActivity.this, "Uploaded", Toast.LENGTH_SHORT).show();
 
         }

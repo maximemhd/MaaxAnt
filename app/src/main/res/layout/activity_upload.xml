@@ -7,6 +7,12 @@
         android:id="@+id/list_files"
         android:layout_width="fill_parent"
         android:layout_weight="1.0"/>
+
+    <Button
+        android:id="@+id/button_check"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:text="Check status" />
 </LinearLayout>
 
 
