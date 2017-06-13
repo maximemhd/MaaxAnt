@@ -5,8 +5,6 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -54,12 +52,13 @@ ParamPost parampost_global;
 
            File dir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
             final File[] files = dir.listFiles();
+            //final File[] fitfiles;
 
             for (File file : files) {
                 //Toast.makeText(this, file.getName(), Toast.LENGTH_SHORT).show();
-                //if(file.getName().substring(file.getName().lastIndexOf(".")).equals("fit")){
+                if(java.util.Objects.equals(file.getName().substring(file.getName().lastIndexOf(".")+1), "fit")){
                     liste.add(file.getName());
-                //}
+                }
 
                 //listFitFile.add(file);
             }
@@ -72,12 +71,12 @@ ParamPost parampost_global;
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
                     // Clicking on items
-                    String filename = parent.getItemAtPosition(position).toString();
+                    //String filename = parent.getItemAtPosition(position).toString();
                     //toast filename avec string
-                    Toast.makeText(UploadActivity.this, "Activity read from External Storage..."+filename, Toast.LENGTH_LONG).show();
+                   // Toast.makeText(UploadActivity.this, "Activity read from External Storage..."+filename, Toast.LENGTH_LONG).show();
 
                     //avec tableau de files
-                    Toast.makeText(UploadActivity.this, "Activity read from External Storage..."+files[position].toString(), Toast.LENGTH_LONG).show();
+                   // Toast.makeText(UploadActivity.this, "Activity read from External Storage..."+files[position].toString(), Toast.LENGTH_LONG).show();
 
 
                     SharedPreferences sharedPref = UploadActivity.this.getSharedPreferences(
@@ -92,7 +91,7 @@ ParamPost parampost_global;
                         config = StravaConfig.withToken(token)
                                 .debug()
                                 .build();
-                        MyTaskParams param = new MyTaskParams(config, files[position]);
+                        MyTaskParams param = new MyTaskParams(config,parent.getItemAtPosition(position).toString());
                         new async_upload().execute(param);
                     }
 
@@ -123,18 +122,28 @@ ParamPost parampost_global;
 
             UploadAPI uploadAPI = new UploadAPI(config[0].config);
             UploadStatus uploadStatus  = null;
+            File dir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
+            final File[] files = dir.listFiles();
+            File file_up = null;
+
+            for (File file : files) {
+                //Toast.makeText(this, file.getName(), Toast.LENGTH_SHORT).show();
+                if (file.getName().equals(config[0].file)) {
+                    file_up = file;
+                }
+            }
 
 
             try {
-                uploadStatus = uploadAPI.uploadFile(config[0].file)
+                uploadStatus = uploadAPI.uploadFile(file_up)
                         .withDataType(DataType.FIT)
-                        //.withActivityType(UploadActivityType.RIDE)
-                        .withName("Test")
+                        .withActivityType(UploadActivityType.RUN)
+                        .withName("New activity")
                         .withDescription("No description")
                         .isPrivate(true)
                         .hasTrainer(false)
                         .isCommute(false)
-                        //.withExternalID("test.fit")
+                        .withExternalID("test.fit")
                         .execute();
             }catch(StravaUnauthorizedException e){
                 Toast.makeText(UploadActivity.this, "erreur", Toast.LENGTH_SHORT).show();
@@ -163,9 +172,9 @@ ParamPost parampost_global;
     }
     private static class MyTaskParams {
         StravaConfig config;
-        File file;
+        String file;
 
-        MyTaskParams(StravaConfig config, File file) {
+        MyTaskParams(StravaConfig config, String file) {
             this.config = config;
             this.file = file;
 
@@ -200,7 +209,11 @@ ParamPost parampost_global;
             }catch(StravaAPIException e){
                 Toast.makeText(UploadActivity.this, "erreur", Toast.LENGTH_SHORT).show();
             }finally{
-            return uploadStatus.getError();
+                if(uploadStatus==null){
+                    return "Erreur";
+                }
+                else
+            return uploadStatus.getStatus();
             }
 
         }

@@ -10,9 +10,14 @@ All rights reserved.
 package io.github.maximemhd.maaxant;
 
 //import android.app.AlertDialog;
+import android.Manifest;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.os.AsyncTask;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
@@ -72,6 +77,24 @@ public class Activity_Dashboard extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
+        if (ActivityCompat.checkSelfPermission(Activity_Dashboard.this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)
+        {
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                requestPermissions(new String[] { Manifest.permission.READ_EXTERNAL_STORAGE }, 2);
+            }
+
+        }
+        if (ActivityCompat.checkSelfPermission(Activity_Dashboard.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)
+        {
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                requestPermissions(new String[] { Manifest.permission.WRITE_EXTERNAL_STORAGE }, 2);
+            }
+
+        }
+
+
         try
         {
             Log.i("ANT+ Plugin Sampler", "Version: " + getPackageManager().getPackageInfo(getPackageName(), 0).versionName);
@@ -98,9 +121,10 @@ public class Activity_Dashboard extends AppCompatActivity
         uploadButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Activity_Dashboard.this, UploadActivity.class);
-                startActivity(intent);
-            }
+
+                    Intent intent = new Intent(Activity_Dashboard.this, UploadActivity.class);
+                    startActivity(intent);
+                }
         });
 
         SharedPreferences sharedPref = this.getSharedPreferences(
@@ -118,21 +142,9 @@ public class Activity_Dashboard extends AppCompatActivity
             new async().execute(config);
         }
 
-
-
         SimpleAdapter adapter = new SimpleAdapter(this, menuItems, android.R.layout.simple_list_item_2, new String[]{"title","desc"}, new int[]{android.R.id.text1,android.R.id.text2});
         setListAdapter(adapter);
 
-       /* try
-        {
-            ((TextView)findViewById(R.id.textView_PluginSamplerVersion)).setText("Sampler Version: " + getPackageManager().getPackageInfo(getPackageName(), 0).versionName);
-        } catch (NameNotFoundException e)
-        {
-            ((TextView)findViewById(R.id.textView_PluginSamplerVersion)).setText("Sampler Version: ERR");
-        }
-        ((TextView)findViewById(R.id.textView_PluginLibVersion)).setText("Built w/ PluginLib: " + PluginLibVersionInfo.PLUGINLIB_VERSION_STRING);
-        ((TextView)findViewById(R.id.textView_PluginsPkgVersion)).setText("Installed Plugin Version: " + AntPluginPcc.getInstalledPluginsVersionString(this));
-    */
     }
 
     //Launch the appropriate activity/action when a selection is made
@@ -311,6 +323,7 @@ public class Activity_Dashboard extends AppCompatActivity
                 ((TextView)findViewById(R.id.textView_athlete)).setText("Hello "+result.getFirstName()+" ! You are connected to Strava :-)");
                 StravaLoginButton loginButton = (StravaLoginButton) findViewById(R.id.login_button);
                 loginButton.setVisibility(View.GONE);
+                ((TextView)findViewById(R.id.textView_connection)).setText("Connected");
                 //U+1F603 (emoji)
             }
 
