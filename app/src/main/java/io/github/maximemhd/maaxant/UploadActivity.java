@@ -138,12 +138,12 @@ ParamPost parampost_global;
                 uploadStatus = uploadAPI.uploadFile(file_up)
                         .withDataType(DataType.FIT)
                         .withActivityType(UploadActivityType.RUN)
-                        .withName("New activity")
+                        .withName("Run activity")
                         .withDescription("No description")
-                        .isPrivate(true)
+                        .isPrivate(false)
                         .hasTrainer(false)
                         .isCommute(false)
-                        .withExternalID("test.fit")
+                        .withExternalID("uploadActivity.fit")
                         .execute();
             }catch(StravaUnauthorizedException e){
                 Toast.makeText(UploadActivity.this, "erreur", Toast.LENGTH_SHORT).show();
