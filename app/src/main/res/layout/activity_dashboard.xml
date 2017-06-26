@@ -44,9 +44,10 @@ All rights reserved.
         android:text="Installed Plugin Version:" />-->
     <Button
         android:id="@+id/button_upload"
+        style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1.0"
+        android:background="#fc4c02"
         android:text="Upload on Strava" />
 
     <TextView
