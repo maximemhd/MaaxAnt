@@ -105,7 +105,7 @@ public class Activity_Dashboard extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
         List<Map<String,String>> menuItems = new ArrayList<Map<String,String>>();
-        menuItems.add(new HashMap<String,String>(){{put("title","Watch Downloader Utility");put("desc","Download data from watches");}});
+        menuItems.add(new HashMap<String,String>(){{put("title","Ant+ Watch Downloader");put("desc","Download data from watches");}});
         menuItems.add(new HashMap<String,String>(){{put("title","Launch ANT+ Plugin Manager");put("desc","Controls device database and default settings");}});
 
         //login button

@@ -26,7 +26,7 @@
         <activity
             android:name=".watchdownloader.Activity_WatchScanList"
             android:configChanges="orientation"
-            android:label="Watch Downloader Plugin Sampler"
+            android:label="Ant downloader"
             android:screenOrientation="portrait" />
         <activity
             android:name="com.sweetzpot.stravazpot.authenticaton.ui.StravaLoginActivity"
