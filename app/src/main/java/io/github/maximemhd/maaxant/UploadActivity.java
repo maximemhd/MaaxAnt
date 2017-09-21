@@ -139,7 +139,7 @@ ParamPost parampost_global;
                         .withDataType(DataType.FIT)
                         .withActivityType(UploadActivityType.RUN)
                         .withName("Run activity")
-                        .withDescription("No description")
+                        .withDescription("")
                         .isPrivate(false)
                         .hasTrainer(false)
                         .isCommute(false)

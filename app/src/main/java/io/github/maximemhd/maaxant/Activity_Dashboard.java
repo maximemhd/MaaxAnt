@@ -207,7 +207,7 @@ public class Activity_Dashboard extends AppCompatActivity
     private void login() {
         Intent intent = StravaLogin.withContext(this)
                 .withClientID(13966)
-                .withRedirectURI("http://maaxrun.pythonanywhere.com")
+                .withRedirectURI("http://maaxmapstrava.herokuapp.com")
                 .withApprovalPrompt(AUTO)
                 .withAccessScope(AccessScope.VIEW_PRIVATE_WRITE)
                 .makeIntent();
